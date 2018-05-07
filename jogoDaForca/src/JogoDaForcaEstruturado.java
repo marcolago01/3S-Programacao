@@ -7,7 +7,12 @@ public class JogoDaForcaEstruturado {
 //	private static String asterisco = new String(new char[palavra.length()]).replace("\0", "*");
 //	private static int contador = 0;
 //
+        
 	public static void main(String[]  args) {
+            Palavra teste = new Palavra();
+            teste.inserirPalavras();
+            
+            /*
             Forca forca = new Forca();
             
             forca.renderizarForca(forca.getContador(),forca.getPalavra());
@@ -29,7 +34,8 @@ public class JogoDaForcaEstruturado {
                 if(forca.getAsterisco().equals(forca.getPalavra())){
                     System.out.println("Correto! Voce venceu! A palavra é " + forca.getPalavra());
                 }
-        }
+        }*/
+        
 //		Scanner sc = new Scanner(System.in);
 //
 //		while (contador < 7 && asterisco.contains("*")) {
@@ -140,5 +146,6 @@ public class JogoDaForcaEstruturado {
 //
 //		}
 //		sc.close();
+            
 	}
 }

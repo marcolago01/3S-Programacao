@@ -11,6 +11,15 @@ import java.util.Scanner;
 public class Palavra {
     private String[] palavras = new String[0];
 
+    public Palavra(){}
+    
+    public Palavra(String...palavra){
+        for (int i = 0; i < palavra.length; i++) {
+            System.arraycopy(this.palavras, 0, this.palavras, 0, palavras.length+1);
+            this.palavras[i]=palavra[i];
+        }
+    }
+    
     public void inserirPalavras() {
         String palavra=capturarPalavra();
         System.arraycopy(this.palavras, 0, this.palavras, 0, palavras.length+1);
