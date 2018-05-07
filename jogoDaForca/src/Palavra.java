@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.util.Scanner;
 /**
  *
  * @author 5586658
@@ -11,10 +11,20 @@
 public class Palavra {
     private String[] palavras = new String[0];
 
-    public void setPalavras(String... palavras) {
-        this.palavras = palavras;
+    public void inserirPalavras() {
+        String palavra=capturarPalavra();
+        System.arraycopy(this.palavras, 0, this.palavras, 0, palavras.length+1);
+        this.palavras[palavras.length-1]=palavra;
     }
 
+    private String capturarPalavra(){
+        Scanner sc = new Scanner(System.in);
+        
+        String tecla = sc.next();
+    
+        return tecla;
+    }
+    
     public String[] getPalavras() {
         return this.palavras;
     }
