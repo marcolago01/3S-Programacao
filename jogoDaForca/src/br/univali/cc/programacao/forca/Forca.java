@@ -1,8 +1,5 @@
 package br.univali.cc.programacao.forca;
 
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,9 +32,6 @@ public class Forca {
         this.asterisco = new String(new char[palavra.length()]).replace("\0", "*");
     }
     
-    public void setAsterisco(String asterisco){
-        this.asterisco=asterisco;
-    }
     public String getAsterisco(){
         return this.asterisco;
     }
@@ -46,9 +40,6 @@ public class Forca {
         return this.palavra;
     }
     
-    public void incrementarContador(){
-        this.contador++;
-    }
     public int getContador(){
         return this.contador;
     }
@@ -67,7 +58,15 @@ public class Forca {
         return novoAsterisco;
     }
      
-    public void renderizarForca(){
+    public void validarNovoAsterisco(String novoAsterisco){
+        if(this.asterisco.endsWith(novoAsterisco)){
+            this.contador++;
+            renderizarForca();
+        }else{
+            this.asterisco=novoAsterisco;
+        }
+    }
+    private void renderizarForca(){
         if (contador == 1) {
                 System.out.println("Palpite errado, tente de novo!");
                 System.out.println();
@@ -156,3 +155,5 @@ public class Forca {
     }
     
 }
+
+        

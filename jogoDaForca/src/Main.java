@@ -17,7 +17,6 @@ public class Main {
             Scanner sc = new Scanner(System.in);
             
             Forca forca = new Forca();
-            forca.renderizarForca();
             
             while(forca.getContador() < 7 && forca.getAsterisco().contains("*")){
                 System.out.println("Adivinhe qualquer letra na palavra");
@@ -27,14 +26,7 @@ public class Main {
                 char tecla = capturar.charAt(0);
                 
                 String novoAsterisco = forca.novoAsterisco(tecla);
-                
-                if(forca.getAsterisco().endsWith(novoAsterisco)){
-                    forca.incrementarContador();
-                    forca.renderizarForca();
-                }else{
-                    forca.setAsterisco(novoAsterisco);
-                }
-                
+                forca.validarNovoAsterisco(novoAsterisco);
                 if(forca.palavraIgual()){
                     System.out.println("Correto! Voce venceu! A palavra é " + forca.getPalavra());
                 }
