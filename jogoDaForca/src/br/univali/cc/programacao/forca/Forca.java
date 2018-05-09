@@ -1,5 +1,7 @@
+package br.univali.cc.programacao.forca;
 
-import java.util.Scanner;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +14,7 @@ import java.util.Scanner;
  * @author 5586658
  */
 
-public class Forca implements Interface {
+public class Forca {
     
     private String[] palavras;
     private String palavra;
@@ -22,9 +24,7 @@ public class Forca implements Interface {
     public Forca(){
         this.palavras = new String[5];
         String[] words= {"terminator", "banana", "computer", "cow", "rain", "water" };
-        for (int i = 0; i < this.palavras.length; i++) {
-            this.palavras[i]=words[i];
-        }
+        System.arraycopy(words, 0, this.palavras, 0, this.palavras.length);
         this.palavra = palavras[(int) (Math.random() * palavras.length)];
         this.asterisco = new String(new char[palavra.length()]).replace("\0", "*");    
     }
@@ -42,9 +42,6 @@ public class Forca implements Interface {
         return this.asterisco;
     }
     
-    public int getTamanhoPalavra(){
-        return this.palavra.length();
-    }
     public String getPalavra(){
         return this.palavra;
     }
@@ -69,9 +66,8 @@ public class Forca implements Interface {
         }
         return novoAsterisco;
     }
-    
-    @Override
-    public void renderizarForca(int contador,String palavra){
+     
+    public void renderizarForca(){
         if (contador == 1) {
                 System.out.println("Palpite errado, tente de novo!");
                 System.out.println();
@@ -155,13 +151,8 @@ public class Forca implements Interface {
         }
     }
     
-    @Override
-    public char capturarTecla(){
-        Scanner sc = new Scanner(System.in);
-        
-        String tecla = sc.next();
-    
-        return tecla.charAt(0);
+    public boolean palavraIgual(){
+        return this.asterisco.equals(this.palavra);
     }
     
 }
