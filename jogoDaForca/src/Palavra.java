@@ -15,15 +15,24 @@ public class Palavra {
     
     public Palavra(String...palavra){
         for (int i = 0; i < palavra.length; i++) {
-            System.arraycopy(this.palavras, 0, this.palavras, 0, palavras.length+1);
+            String[] temp = this.palavras; 
+        
+            this.palavras=new String[i+1];
+            System.arraycopy(temp, 0, this.palavras, 0, i);
             this.palavras[i]=palavra[i];
         }
     }
     
     public void inserirPalavras() {
         String palavra=capturarPalavra();
-        System.arraycopy(this.palavras, 0, this.palavras, 0, palavras.length+1);
-        this.palavras[palavras.length-1]=palavra;
+        
+        int tamanho = this.palavras.length;
+        String[] temp = new String[tamanho];
+        System.arraycopy(this.palavras, 0, temp, 0,tamanho);
+        
+        this.palavras=new String[tamanho+1];
+        System.arraycopy(temp, 0, this.palavras, 0, tamanho);
+        this.palavras[tamanho]=palavra;
     }
 
     private String capturarPalavra(){

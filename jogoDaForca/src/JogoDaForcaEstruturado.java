@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 public class JogoDaForcaEstruturado {
 
@@ -9,11 +9,9 @@ public class JogoDaForcaEstruturado {
 //
         
 	public static void main(String[]  args) {
-            Palavra teste = new Palavra();
-            teste.inserirPalavras();
+            Palavra teste = new Palavra("teste","ola","suprise");
             
-            /*
-            Forca forca = new Forca();
+            Forca forca = new Forca(teste.getPalavras());
             
             forca.renderizarForca(forca.getContador(),forca.getPalavra());
             
@@ -34,8 +32,8 @@ public class JogoDaForcaEstruturado {
                 if(forca.getAsterisco().equals(forca.getPalavra())){
                     System.out.println("Correto! Voce venceu! A palavra é " + forca.getPalavra());
                 }
-        }*/
-        
+        }
+       
 //		Scanner sc = new Scanner(System.in);
 //
 //		while (contador < 7 && asterisco.contains("*")) {
