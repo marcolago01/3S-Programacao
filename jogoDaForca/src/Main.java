@@ -30,7 +30,7 @@ public class Main {
                 if(forca.palavraIgual()){
                     System.out.println("Correto! Voce venceu! A palavra é " + forca.getPalavra());
                 }
-        }
+            }
             sc.close();
     }
 }
