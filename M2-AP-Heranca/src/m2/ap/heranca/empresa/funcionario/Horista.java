@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package m2.ap.heranca;
+package m2.ap.heranca.empresa.funcionario;
 
 /**
  *
@@ -22,11 +22,6 @@ public class Horista extends Funcionario{
     public double getSalario(){
         return horas*valorHora;
     }
-    
-    @Override
-    public void setSalario(){
-        super.salario=getSalario();
-        
-    }
+
             
 }

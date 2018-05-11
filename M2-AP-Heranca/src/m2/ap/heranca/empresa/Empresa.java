@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package m2.ap.heranca.empresa;
-import m2.ap.heranca.empresa.funcionarios.Funcionario;
+import m2.ap.heranca.empresa.funcionario.Funcionario;
 import m2.ap.heranca.empresa.despesa.Despesa;
 
 /**
@@ -12,6 +12,8 @@ import m2.ap.heranca.empresa.despesa.Despesa;
  * @author marco.lago
  */
 public class Empresa implements Despesa{
+    
+    private double valor=0;
     
     Despesa[] gasto= new Despesa[40];
     Funcionario[] funcionarios= new Funcionario[40];
@@ -26,6 +28,16 @@ public class Empresa implements Despesa{
         }
     }
     
+    public void adicionarGasto(Despesa despesa){
+        int tamanho=this.gasto.length;
+        for (int i = 0; i < tamanho; i++) {
+            if(this.gasto[i]==null){
+                this.gasto[i]=despesa;
+                i=tamanho;
+            }
+        }
+    }
+    
     public double getTotalSalarios(){
         double total=0;
         for (Funcionario funcionario : funcionarios) {
@@ -34,6 +46,26 @@ public class Empresa implements Despesa{
             }
         }
         return total;
+    }
+    
+    private double getTotalGastos(){
+        double total=0;
+        for (Despesa despesa : gasto) {
+            if(despesa !=null){
+                total+=despesa.getValores();
+            }
+        }
+        return total;
+    }
+    
+    private void calcularTotalGastos(){
+        this.valor+=getTotalSalarios()+getTotalGastos();
+    }
+    
+    @Override
+    public double getValores(){
+        calcularTotalGastos();
+        return this.valor;
     }
         
 }

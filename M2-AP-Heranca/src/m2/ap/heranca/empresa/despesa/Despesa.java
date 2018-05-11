@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package m2.ap.heranca;
+package m2.ap.heranca.empresa.despesa;
 
 /**
  *
- * @author 5586658
+ * @author marco
  */
-abstract public class Funcionario {
-    protected double salario;
-    abstract public double getSalario();
-    abstract public void setSalario();
+public interface Despesa {
+    
+    public double getValores();
 }
