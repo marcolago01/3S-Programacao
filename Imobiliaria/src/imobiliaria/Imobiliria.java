@@ -23,20 +23,41 @@ public class Imobiliria {
         this.imoveis=Arrays.copyOf(imoveis,imoveis.length+1);
     }
     
-    private void aumentarArrayLocacao(){
+    private void aumentarArrayVenda(){
         this.vendas=Arrays.copyOf(vendas,vendas.length+1);
     }
     
-    private void aumentarArrayVenda(){
+    private void aumentarArrayLocacao(){
         this.locacoes=Arrays.copyOf(locacoes,locacoes.length+1);
     }
     
+    private boolean statusEmLocacaoVenda(int id){
+        for (Imovel imovel : imoveis) {
+            if(imovel.getID() == id){
+                return "A Venda".equals(imovel.getStatus()) ||
+                        "Para Locacao".equals(imovel.getStatus()) ||
+                        "Para Locacao ou Venda".equals(imovel.getStatus());
+            }
+        }
+        return false;
+    }
+    
+    private boolean statusVendidoLocado(int id){
+        for (Imovel imovel : imoveis) {
+            if(imovel.getID() == id){
+                return "Vendido".equals(imovel.getStatus()) ||
+                        "Locado".equals(imovel.getStatus());
+            }
+        }
+        return false;
+    }
     /**
      * @param tipo (1=Casa, 2=Apartamento, 3=Terreno, 4=SalaComercial)
      * @param status
      * @param area
      * @param descricao
      */
+    
     public void adicionarImovel(int tipo,String status,double area
                                 , String descricao){
         Imovel novo;
@@ -64,56 +85,20 @@ public class Imobiliria {
     }
     
     
-    public void colocarAVenda(int id){
+    public void colocarAVenda(int id);
         
-        for (Imovel imovel : imoveis) {
-            if(imovel.getID()==id){
-                imovel.setStatus("A Venda");
-            }
-        }
-    }
     
-    public void colocarParaLocacao(int id){
+    public void colocarParaLocacao(int id);
         
-        for (Imovel imovel: imoveis){
-            if(imovel.getID()==id){
-                imovel.setStatus("Para Locacao");
-            }
-        }
-    }
-    
-    public void colocarParaLocacaoEVenda(int id){
-        
-        for (Imovel imovel: imoveis){
-            if(imovel.getID()==id){
-                imovel.setStatus("Para Locacao ou Venda");
-            }
-        }
-    }
-    
+    public void colocarParaLocacaoEVenda(int id);
+   
     public void exibirImoveis(){
         for (Imovel imovel : imoveis) {
             System.out.print(imovel.exibirDetalhes());   
         }
     }
     
-    public void locacaoImovel(int id,String inquilino,String data){
-        for (Imovel imovel : imoveis) {
-            if(imovel.getID()==id && (!"Para Locacao".equals(imovel.getStatus()) || !"Para Locacao ou Venda".equals(imovel.getStatus()))){
-                aumentarArrayLocacao();
-                locacoes[locacoes.length-1]=new Locacao();
-                locacoes[locacoes.length-1].locarImovel(id, imovel, inquilino, data);
-            }
-        }
-    }
+    public void locacaoImovel(int id,String inquilino,String data);
     
-    public void vendaImovel(int id,String data,String comprador){
-        for (Imovel imovel : imoveis) {
-            if(imovel.getID()==id && (!"A Venda".equals(imovel.getStatus()) || !"Para Locacao ou Venda".equals(imovel.getStatus()))){
-                aumentarArrayVenda();
-                vendas[vendas.length-1]=new Venda();
-                vendas[vendas.length-1].venderImovel(id, imovel, comprador, data);
-            }
-        }
-    }
+    public void vendaImovel(int id,String data,String comprador);
 }

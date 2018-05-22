@@ -29,7 +29,7 @@ public class Apartamento extends Imovel{
                 "Sitiana no predio "+nomePredio+" no"+andar+"\n"+
                 "Possui "+this.banheiros+" banheiro\n"+
                 "Possui "+this.quartos+" quartos\n"+
-                 "Com "+this.vagasGaragem+" vagas na garagem";
+                 "Com "+this.vagasGaragem+" vagas na garagem\n";
     }
 
 }

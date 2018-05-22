@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Principal;
+import Imobiliaria.Imobiliria;
 
 /**
  *
@@ -15,7 +16,14 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Imobiliria teste = new Imobiliria();
+        
+        teste.adicionarImovel(1, "legal", 25, "eae");
+        teste.exibirImoveis();
+        teste.colocarAVenda(1);
+        teste.exibirImoveis();
+        teste.vendaImovel(1, "22/05/2018", "fulano");
+        teste.exibirImoveis();
     }
     
 }

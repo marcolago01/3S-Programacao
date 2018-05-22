@@ -20,6 +20,6 @@ public class SalaComercial extends Imovel{
     public String exibirDetalhes(){
       return 
                 "ID: "+id+" \nStatus: "+status+
-                "\nArea: "+area+"\nDescricao: "+descricao;
+                "\nArea: "+area+"\nDescricao: "+descricao+"\n";
     }
 }

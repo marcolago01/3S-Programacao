@@ -25,6 +25,6 @@ public class Casa extends Imovel {
                 "ID: "+id+" \nStatus: "+status+
                 "\nArea: "+area+"\nDescricao: "+descricao+
               "\nVagas de Garagem: "+vagasGaragem+"\nBanheiros: "+banheiros+
-              "\nQuarto: "+quartos;
+              "\nQuarto: "+quartos+"\n";
    }
 }
