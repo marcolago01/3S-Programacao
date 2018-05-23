@@ -89,21 +89,55 @@ public class Imobiliria {
         
     }
      
-    public void colocarAVenda(int id){
+    public boolean colocarAVenda(int id){
+        if(imoveis[id-1]==null){
+            return false;
+        }
+        
         if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
              imoveis[id-1].setStatus("A Venda");
         }
+        return false;
     }
         
-    public void colocarParaLocacao(int id){
+    public boolean colocarParaLocacao(int id){
+        if(imoveis[id-1]==null){
+            return false;
+        }
+        
         if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
              imoveis[id-1].setStatus("Para Locacao");
+             return true;
         }
+        
+        return false;
     }
         
-    public void colocarParaLocacaoEVenda(int id){
+    public boolean colocarParaLocacaoEVenda(int id){
+        if(imoveis[id-1]==null){
+            return false;
+        }
+        
         if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
              imoveis[id-1].setStatus("Para Locacao ou Venda");
+        }
+        
+        return false;
+    }
+    
+    public void exibirUltimoImovel(){
+        int tamanho = imoveis.length;
+        if(tamanho >0){
+             System.out.print(imoveis[tamanho-1].exibirDetalhes());
+        }
+    }
+    
+    public void exibirImovelEspecifico(int id){
+        for (Imovel imovel : imoveis) {
+            if(imovel.getID() == id){
+                System.out.print(imovel.exibirDetalhes());
+                return;
+            }  
         }
     }
    
@@ -113,24 +147,38 @@ public class Imobiliria {
         }
     }
     
-    public void locacaoImovel(int id,String inquilino,String data, double valor){
+    public boolean locacaoImovel(int id,String inquilino,String data, double valor){
+        if(imoveis[id-1]==null){
+            return false;
+        }
+        
         if(statusImovel(id, 1)||statusImovel(id, 3)){
             aumentarArrayLocacao();
             int tamanho= this.locacoes.length;
             Imovel imovel = this.imoveis[id-1];
             this.locacoes[tamanho-1]=new Locacao();
             this.locacoes[tamanho-1].locarImovel(valor, imovel, inquilino, data);
+            return true;
         }
+        return false;
     }
     
-    public void vendaImovel(int id,String data,String comprador,double valor){
+    public boolean vendaImovel(int id,String data,String comprador,double valor){
+        if(imoveis[id-1]==null){
+            return false;
+        }
+        
         if(statusImovel(id, 2)||statusImovel(id, 3)){
             aumentarArrayVenda();
             int tamanho = this.vendas.length;
             Imovel imovel = this.imoveis[id-1];
             Venda venda = new Venda();
+
             venda.venderImovel(valor, imovel, comprador, data);
             this.vendas[tamanho-1]=venda;
+            return true;
         }
+        
+        return false;
     }
 }
