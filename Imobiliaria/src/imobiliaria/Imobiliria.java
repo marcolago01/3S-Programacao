@@ -57,6 +57,18 @@ public class Imobiliria {
        }
     }
     
+    private boolean validarID(int id){
+        int tamanho = this.imoveis.length;
+        if(id > tamanho || id <= 0){
+            return false;
+        }
+        
+        if(this.imoveis[id-1] == null){
+            return false;
+        }
+        
+        return true;
+    }
     /**
      * @param tipo (1=Casa, 2=Apartamento, 3=Terreno, 4=SalaComercial)
      * @param status
@@ -90,18 +102,19 @@ public class Imobiliria {
     }
      
     public boolean colocarAVenda(int id){
-        if(imoveis[id-1]==null){
+        if(!validarID(id)){
             return false;
         }
         
         if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
              imoveis[id-1].setStatus("A Venda");
+             return true;
         }
         return false;
     }
         
     public boolean colocarParaLocacao(int id){
-        if(imoveis[id-1]==null){
+        if(!validarID(id)){
             return false;
         }
         
@@ -114,31 +127,35 @@ public class Imobiliria {
     }
         
     public boolean colocarParaLocacaoEVenda(int id){
-        if(imoveis[id-1]==null){
+        if(!validarID(id)){
             return false;
         }
         
         if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
              imoveis[id-1].setStatus("Para Locacao ou Venda");
+             return true;
         }
         
         return false;
     }
     
     public void exibirUltimoImovel(){
+        
         int tamanho = imoveis.length;
-        if(tamanho >0){
-             System.out.print(imoveis[tamanho-1].exibirDetalhes());
+        if(tamanho == 0){
+             return;
         }
+        System.out.print(imoveis[tamanho-1].exibirDetalhes());
+        
     }
     
     public void exibirImovelEspecifico(int id){
-        for (Imovel imovel : imoveis) {
-            if(imovel.getID() == id){
-                System.out.print(imovel.exibirDetalhes());
-                return;
-            }  
+        
+        if(!validarID(id)){
+            return;
         }
+
+        System.out.print(imoveis[id-1].exibirDetalhes());         
     }
    
     public void exibirImoveis(){
@@ -148,7 +165,7 @@ public class Imobiliria {
     }
     
     public boolean locacaoImovel(int id,String inquilino,String data, double valor){
-        if(imoveis[id-1]==null){
+        if(!validarID(id)){
             return false;
         }
         
@@ -164,7 +181,7 @@ public class Imobiliria {
     }
     
     public boolean vendaImovel(int id,String data,String comprador,double valor){
-        if(imoveis[id-1]==null){
+        if(!validarID(id)){
             return false;
         }
         

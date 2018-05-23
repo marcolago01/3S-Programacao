@@ -56,7 +56,7 @@ abstract public class Mensagem {
         switch (campo){
             case 1:
                 return
-                        "\nInforme o ID da casa: "
+                        "\nInforme o ID da casa ou digite 0 para sair: "
                 ;
             default:
                 return null;
@@ -66,9 +66,8 @@ abstract public class Mensagem {
     public static String caso3(int campo){
         switch (campo){
             case 1:
-                return
-                        "\nInforme o ID da casa: "
-                ;
+                return caso2(campo);
+
             case 2:
                 return 
                         "\nInforme o comprador: "

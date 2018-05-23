@@ -32,11 +32,11 @@ public class Principal {
            switch (opcao){
                case 1:
                    
-                   double dado = 0;
+                   double dado;
                    int tipo;
                    String descricao;
                    String status;
-                   boolean tipoValido=true;
+                   boolean tipoValido;
                    
                    System.out.print(Mensagem.caso1(1));
                    do{
@@ -45,38 +45,46 @@ public class Principal {
                            tipoValido=false;
                            Mensagem.invalido();
                        }
+                       tipoValido=true;
                    }while(!tipoValido);
                    
                    System.out.print(Mensagem.caso1(2));
                    dado = sc.nextDouble();
+                   sc.nextLine();
                    
                    System.out.print(Mensagem.caso1(3));
                    descricao=sc.nextLine();
                    
                    System.out.print(Mensagem.caso1(4));
                    status=sc.nextLine();
-                   
+                  
                    imobiliaria.adicionarImovel(tipo, status, dado, descricao);
                    System.out.print(Mensagem.valido());
                    break;
                case 2:
-                   boolean locacao;
+                   boolean validarLocacao;
                    
                    do{
                         System.out.print(Mensagem.caso2(1));
                         id=sc.nextInt();
-                        locacao=imobiliaria.colocarParaLocacao(id);
-                   }while(!locacao);
+                        validarLocacao=imobiliaria.colocarParaLocacao(id);
+                        if(id == 0){
+                            break;
+                        }
+                   }while(!validarLocacao);
                    System.out.print(Mensagem.valido());
                    break;
                case 3:
-                   boolean aVenda;
+                   boolean validarVenda;
                    
                    do{
                         System.out.print(Mensagem.caso2(1));
                         id=sc.nextInt();
-                        aVenda=imobiliaria.colocarAVenda(id);
-                   }while(!aVenda);
+                        validarVenda=imobiliaria.colocarAVenda(id);
+                        if(id == 0){
+                            break;
+                        }
+                   }while(!validarVenda);
                    System.out.print(Mensagem.valido());
                    break;
                case 4:
@@ -96,6 +104,9 @@ public class Principal {
                         System.out.print(Mensagem.caso3(1));
                         id=sc.nextInt();
                         vendido = imobiliaria.vendaImovel(id, dataVenda, comprador, valorVenda);
+                        if(id == 0){
+                            break;
+                        }
                    }while(!vendido);
                    System.out.print(Mensagem.valido());
                    break;
@@ -116,6 +127,9 @@ public class Principal {
                         System.out.print(Mensagem.caso3(1));
                         id=sc.nextInt();
                         locado = imobiliaria.locacaoImovel(id, dataLocacao, inquilino, valorLocacao);
+                        if(id == 0){
+                            break;
+                        }
                    }while(!locado);
                    System.out.print(Mensagem.valido());
                    break;
@@ -123,8 +137,15 @@ public class Principal {
                    imobiliaria.exibirImoveis();
                    break;
                case 7:
+                   System.out.print(Mensagem.caso3(1));
+                   id=sc.nextInt();
+                   if(id == 0){
+                        break;
+                    }
+                   imobiliaria.exibirImovelEspecifico(id);
                    break;
                case 8:
+                   imobiliaria.exibirUltimoImovel();
                    break;
                case 9:
                    executar=false;
