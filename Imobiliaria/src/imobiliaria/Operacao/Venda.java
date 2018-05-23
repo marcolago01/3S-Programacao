@@ -24,8 +24,4 @@ public class Venda {
         this.comprador=comprador;
         this.data=data;
     }
-    
-    public boolean vendido(int id){
-        return imovelVendido.getID()==id;    
-    }
 }

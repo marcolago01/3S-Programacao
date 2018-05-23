@@ -11,8 +11,6 @@ package imobiliaria.imovel;
  */
 public class Terreno extends Imovel{
     
-    boolean mato;
-    
     public Terreno(String status,double area, String descricao,int id) {
         super(status, area, descricao,id);
     }
@@ -20,7 +18,7 @@ public class Terreno extends Imovel{
     @Override
     public String exibirDetalhes() {
       return 
-                "ID: "+id+" \nStatus: "+status+
+                "\nID: "+id+" \nStatus: "+status+
                 "\nArea: "+area+"\nDescricao: "+descricao+"\n";
     }
     

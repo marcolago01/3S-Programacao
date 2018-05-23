@@ -21,8 +21,9 @@ public class Principal {
         teste.adicionarImovel(1, "legal", 25, "eae");
         teste.exibirImoveis();
         teste.colocarAVenda(1);
+        teste.vendaImovel(1, "20/20/30", "Dorginhas", 1000);
         teste.exibirImoveis();
-        teste.vendaImovel(1, "22/05/2018", "fulano");
+        teste.colocarAVenda(1);
         teste.exibirImoveis();
     }
     

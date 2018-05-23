@@ -24,8 +24,4 @@ public class Locacao {
         this.inquilino=inquilino;
         this.data=data;
     }
-    
-    public boolean vendido(int id){
-        return imovelLocado.getID()==id;    
-    }
 }

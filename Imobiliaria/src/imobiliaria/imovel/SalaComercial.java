@@ -19,7 +19,7 @@ public class SalaComercial extends Imovel{
     @Override
     public String exibirDetalhes(){
       return 
-                "ID: "+id+" \nStatus: "+status+
+                "\nID: "+id+" \nStatus: "+status+
                 "\nArea: "+area+"\nDescricao: "+descricao+"\n";
     }
 }

@@ -11,10 +11,6 @@ package imobiliaria.imovel;
  */
 public class Casa extends Imovel {
 
-    int vagasGaragem;
-    int banheiros;
-    int quartos;
-    
     public Casa(String status,double area, String descricao,int id) {
         super(status, area, descricao,id);
     }
@@ -22,9 +18,7 @@ public class Casa extends Imovel {
     @Override
     public String exibirDetalhes(){
       return 
-                "ID: "+id+" \nStatus: "+status+
-                "\nArea: "+area+"\nDescricao: "+descricao+
-              "\nVagas de Garagem: "+vagasGaragem+"\nBanheiros: "+banheiros+
-              "\nQuarto: "+quartos+"\n";
+                "\nID: "+id+" \nStatus: "+status+
+                "\nArea: "+area+"\nDescricao: "+descricao+"\n";
    }
 }

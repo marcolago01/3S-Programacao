@@ -5,7 +5,8 @@
  */
 package Imobiliaria;
 
-import imobiliaria.Operacao.*;
+import imobiliaria.Operacao.Locacao;
+import imobiliaria.Operacao.Venda;
 import imobiliaria.imovel.*;
 import java.util.Arrays;
 
@@ -31,33 +32,37 @@ public class Imobiliria {
         this.locacoes=Arrays.copyOf(locacoes,locacoes.length+1);
     }
     
-    private boolean statusEmLocacaoVenda(int id){
-        for (Imovel imovel : imoveis) {
-            if(imovel.getID() == id){
-                return "A Venda".equals(imovel.getStatus()) ||
-                        "Para Locacao".equals(imovel.getStatus()) ||
-                        "Para Locacao ou Venda".equals(imovel.getStatus());
-            }
-        }
-        return false;
+    
+    /**
+     *
+     * @param id = identificador do imovel
+     * @param status = 1 - Em Locação, 2 - Em venda, 3 - Para Locacao ou Venda, 4 - Vendido , 5 - Locado.
+     * @return 
+     */
+    private boolean statusImovel(int id,int status){
+       
+       switch(status){
+           case 1:
+               return this.imoveis[id-1].getStatus().equals("Para Locacao");
+           case 2:
+               return this.imoveis[id-1].getStatus().equals("A Venda");
+           case 3:
+               return this.imoveis[id-1].getStatus().equals("Para Locacao ou Venda");
+           case 4:
+               return this.imoveis[id-1].getStatus().equals("Vendido");
+           case 5:
+               return this.imoveis[id-1].getStatus().equals("Locado");
+           default:
+               return false;
+       }
     }
     
-    private boolean statusVendidoLocado(int id){
-        for (Imovel imovel : imoveis) {
-            if(imovel.getID() == id){
-                return "Vendido".equals(imovel.getStatus()) ||
-                        "Locado".equals(imovel.getStatus());
-            }
-        }
-        return false;
-    }
     /**
      * @param tipo (1=Casa, 2=Apartamento, 3=Terreno, 4=SalaComercial)
      * @param status
      * @param area
      * @param descricao
-     */
-    
+     */  
     public void adicionarImovel(int tipo,String status,double area
                                 , String descricao){
         Imovel novo;
@@ -83,14 +88,24 @@ public class Imobiliria {
         this.imoveis[imoveis.length-1]=novo;
         
     }
-    
-    
-    public void colocarAVenda(int id);
+     
+    public void colocarAVenda(int id){
+        if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
+             imoveis[id-1].setStatus("A Venda");
+        }
+    }
         
-    
-    public void colocarParaLocacao(int id);
+    public void colocarParaLocacao(int id){
+        if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
+             imoveis[id-1].setStatus("Para Locacao");
+        }
+    }
         
-    public void colocarParaLocacaoEVenda(int id);
+    public void colocarParaLocacaoEVenda(int id){
+        if(!statusImovel(id, 4)&&!statusImovel(id, 5)){
+             imoveis[id-1].setStatus("Para Locacao ou Venda");
+        }
+    }
    
     public void exibirImoveis(){
         for (Imovel imovel : imoveis) {
@@ -98,7 +113,24 @@ public class Imobiliria {
         }
     }
     
-    public void locacaoImovel(int id,String inquilino,String data);
+    public void locacaoImovel(int id,String inquilino,String data, double valor){
+        if(statusImovel(id, 1)||statusImovel(id, 3)){
+            aumentarArrayLocacao();
+            int tamanho= this.locacoes.length;
+            Imovel imovel = this.imoveis[id-1];
+            this.locacoes[tamanho-1]=new Locacao();
+            this.locacoes[tamanho-1].locarImovel(valor, imovel, inquilino, data);
+        }
+    }
     
-    public void vendaImovel(int id,String data,String comprador);
+    public void vendaImovel(int id,String data,String comprador,double valor){
+        if(statusImovel(id, 2)||statusImovel(id, 3)){
+            aumentarArrayVenda();
+            int tamanho = this.vendas.length;
+            Imovel imovel = this.imoveis[id-1];
+            Venda venda = new Venda();
+            venda.venderImovel(valor, imovel, comprador, data);
+            this.vendas[tamanho-1]=venda;
+        }
+    }
 }
