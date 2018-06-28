@@ -16,6 +16,14 @@ public class Terreno extends Imovel{
         super(matricula);
         this.mato = mato;
     }
+
+    @Override
+    public String exibirDetalhes() {
+        String temMato = (mato)?"Sim":"Não";
+        return
+                "Matricula: "+getMatricula()+"\n"+
+                "Possui mato: "+temMato+"\n";
+    }
     
     
 }

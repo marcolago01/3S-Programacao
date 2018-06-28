@@ -16,18 +16,28 @@ public class Venda {
     Pessoa comprador;
     Date data;
     double valor;
-    SituacaoLocacao situacao;
+    SituacaoVenda situacao;
 
     public Venda(Imovel imovel, double valor) {
         this.imovel = imovel;
         this.comprador = null;
         this.data = null;
         this.valor = valor;
-        this.situacao = SituacaoLocacao.aberto;
+        this.situacao = SituacaoVenda.aberto;
     }
     
-    public void vender(Pessoa comprador, double valor){
-        
+    public void vender(Pessoa comprador,Date data,double valor){
+        this.data=data;
+        this.valor=valor;
+        this.comprador=comprador;
+        this.situacao=SituacaoVenda.finalizado;
+    }
+    
+    public void cancelar(){
+        if(this.situacao==SituacaoVenda.aberto){
+            this.situacao=SituacaoVenda.cancelado;            
+        }
+
     }
     
 }

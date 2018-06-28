@@ -16,6 +16,13 @@ public class Apartamento extends Imovel{
         super(matricula);
         this.andar = andar;
     }
+
+    @Override
+    public String exibirDetalhes() {
+        return
+                "Matricula: "+getMatricula()+"\n"+
+                "Andar: "+this.andar+"\n";
+    }
     
     
 }

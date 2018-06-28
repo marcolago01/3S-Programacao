@@ -16,5 +16,15 @@ public class SalaComercial extends Imovel{
         super(matricula);
         this.fachada = fachada;
     }
+
+    @Override
+    public String exibirDetalhes() {
+        String temFachada=(this.fachada)?"Sim":"Não";
+        
+        return
+                "Matricula: "+getMatricula()+"\n"+
+                "Possui Fachada: "+temFachada+"\n";
+    }
+    
     
 }

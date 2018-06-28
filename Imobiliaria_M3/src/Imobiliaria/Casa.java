@@ -17,6 +17,14 @@ public class Casa extends Imovel{
         super(matricula);
         this.geminado = geminado;
     }
+
+    @Override
+    public String exibirDetalhes() {
+        String isGeminado = (this.geminado)?"Sim":"Não";
+        return
+                "Matricula: "+getMatricula()+"\n"
+                +"Geminado: "+isGeminado+"\n";
+    }
     
     
     

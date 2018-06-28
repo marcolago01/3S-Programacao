@@ -25,4 +25,6 @@ public abstract class Imovel implements Comparable<Imovel>{
         return matricula;
     }
     
+    public abstract String exibirDetalhes();
+    
 }
