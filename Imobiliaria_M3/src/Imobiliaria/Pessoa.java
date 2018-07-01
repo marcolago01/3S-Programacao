@@ -10,8 +10,8 @@ package Imobiliaria;
  * @author marco
  */
 public class Pessoa {
-    String nome;
-    String cpf;
+    public String nome;
+    public String cpf;
 
     public Pessoa(String nome, String cpf) {
         this.nome = nome;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imobiliaria;
+package Imobiliaria.Dominio;
 
 /**
  *
@@ -22,6 +22,7 @@ public class Casa extends Imovel{
     public String exibirDetalhes() {
         String isGeminado = (this.geminado)?"Sim":"Não";
         return
+                "Tipo: Casa\n"+
                 "Matricula: "+getMatricula()+"\n"
                 +"Geminado: "+isGeminado+"\n";
     }

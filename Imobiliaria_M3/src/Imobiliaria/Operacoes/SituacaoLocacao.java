@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imobiliaria;
+package Imobiliaria.Operacoes;
 
 /**
  *
  * @author marco
  */
-public enum SituacaoVenda {
+public enum SituacaoLocacao {
     aberto, finalizado, cancelado;
 }

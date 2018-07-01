@@ -3,31 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imobiliaria;
+package Imobiliaria.Operacoes;
 
-import java.util.Date;
+import Imobiliaria.Dominio.Imovel;
+import Imobiliaria.Pessoa;
 
 /**
  *
  * @author marco
  */
 public class Venda {
-    Imovel imovel;
-    Pessoa comprador;
-    Date data;
-    double valor;
-    SituacaoVenda situacao;
+    public Imovel imovel;
+    public Pessoa comprador;;
+    public double valor;
+    public SituacaoVenda situacao;
 
     public Venda(Imovel imovel, double valor) {
         this.imovel = imovel;
         this.comprador = null;
-        this.data = null;
         this.valor = valor;
         this.situacao = SituacaoVenda.aberto;
     }
     
-    public void vender(Pessoa comprador,Date data,double valor){
-        this.data=data;
+    public void vender(Pessoa comprador,double valor){
         this.valor=valor;
         this.comprador=comprador;
         this.situacao=SituacaoVenda.finalizado;
@@ -40,4 +38,13 @@ public class Venda {
 
     }
     
+    public String exibirLocacao(){
+        String compradorPrint = (this.comprador == null)? "Não definido":this.comprador.nome;
+        
+        return
+                "Matricula: "+this.imovel.getMatricula()+"\n"+
+                "Inquilino: "+compradorPrint+"\n"+
+                "Mensalidade: "+this.valor+"\n"+
+                "Situação: "+this.situacao.name()+"\n";
+    }
 }

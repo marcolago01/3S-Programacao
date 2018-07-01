@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imobiliaria;
+package Imobiliaria.Dominio;
 
 /**
  *
@@ -21,6 +21,7 @@ public class Terreno extends Imovel{
     public String exibirDetalhes() {
         String temMato = (mato)?"Sim":"Não";
         return
+                "Tipo: Terreno\n"+
                 "Matricula: "+getMatricula()+"\n"+
                 "Possui mato: "+temMato+"\n";
     }

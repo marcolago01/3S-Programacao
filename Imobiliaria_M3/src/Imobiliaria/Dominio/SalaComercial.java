@@ -3,25 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imobiliaria;
+package Imobiliaria.Dominio;
 
 /**
  *
  * @author marco
  */
-public class Apartamento extends Imovel{
-    private int andar;
+public class SalaComercial extends Imovel{
+    private boolean fachada;
 
-    public Apartamento(int andar, String matricula) {
+    public SalaComercial(boolean fachada, String matricula) {
         super(matricula);
-        this.andar = andar;
+        this.fachada = fachada;
     }
 
     @Override
     public String exibirDetalhes() {
+        String temFachada=(this.fachada)?"Sim":"Não";
+        
         return
+                "Tipo: Sala Comercial\n"+
                 "Matricula: "+getMatricula()+"\n"+
-                "Andar: "+this.andar+"\n";
+                "Possui Fachada: "+temFachada+"\n";
     }
     
     

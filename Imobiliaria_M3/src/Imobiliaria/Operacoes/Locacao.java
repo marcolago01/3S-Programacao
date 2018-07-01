@@ -3,34 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imobiliaria;
+package Imobiliaria.Operacoes;
 
-import java.util.Date;
+import Imobiliaria.Dominio.Imovel;
+import Imobiliaria.Pessoa;
 
 /**
  *
  * @author 5586658
  */
 public class Locacao {
-    Imovel imovel;
-    Pessoa inquilino;
-    Date data;
-    Date ate;
-    double mensalidade;
-    SituacaoLocacao situacao;
+    public Imovel imovel;
+    public Pessoa inquilino;
+    public double mensalidade;
+    public SituacaoLocacao situacao;
     
     public Locacao(Imovel imovel,double valor){
         this.imovel=imovel;
         this.inquilino=null;
-        this.data=null;
         this.mensalidade=valor;
         this.situacao=SituacaoLocacao.aberto;
     }
     
-    public void locar(Pessoa inquilino,Date data,Date ate,double valor){
+    public void locar(Pessoa inquilino,double valor){
         this.inquilino=inquilino;
-        this.data=data;
-        this.ate=ate;
         this.situacao=SituacaoLocacao.finalizado;
         this.mensalidade=valor;
     }
@@ -39,5 +35,15 @@ public class Locacao {
         if(this.situacao==SituacaoLocacao.aberto){
             this.situacao=SituacaoLocacao.cancelado;
         }
+    }
+    
+    public String exibirLocacao(){
+        String inquilinoPrint = (this.inquilino == null)? "Não definido":this.inquilino.nome;
+        
+        return
+                "Matricula: "+this.imovel.getMatricula()+"\n"+
+                "Inquilino: "+inquilinoPrint+"\n"+
+                "Mensalidade: "+this.mensalidade+"\n"+
+                "Situação: "+this.situacao.name()+"\n";
     }
 }

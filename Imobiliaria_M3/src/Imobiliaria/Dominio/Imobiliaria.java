@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imobiliaria;
+package Imobiliaria.Dominio;
+import Imobiliaria.Operacoes.*;
+import Imobiliaria.*;
+import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -30,6 +33,15 @@ public class Imobiliaria {
         this.imoveis.add(imovel);
     }
     
+    public Imovel obterImovel (String matricula){
+        return (Imovel) this.imoveis.stream()
+                .filter(imovel -> imovel.getMatricula().equals(matricula))
+                .findFirst()
+                .get();
+    }
+    
+    //Venda
+    
     private boolean podeVender(Imovel imovel){
         return this.vendas.stream()
                 .filter(venda -> venda.imovel.equals(imovel) && venda.situacao == SituacaoVenda.aberto)
@@ -42,12 +54,12 @@ public class Imobiliaria {
         }
     }
     
-    public void vender(Imovel imovel, Date data, double valor, Pessoa comprador){
-        this.vender(imovel.getMatricula(),data,valor,comprador);
+    public void vender(Imovel imovel, double valor, Pessoa comprador){
+        this.vender(imovel.getMatricula(),valor,comprador);
     }
     
-    public void vender(String matricula, Date data, double valor, Pessoa comprador){
-        this.obterVenda(matricula, SituacaoVenda.aberto).vender(comprador, data, valor);
+    public void vender(String matricula, double valor, Pessoa comprador){
+        this.obterVenda(matricula, SituacaoVenda.aberto).vender(comprador, valor);
     }
             
     public Venda obterVenda(String matricula, SituacaoVenda situacao){
@@ -65,6 +77,22 @@ public class Imobiliaria {
         this.obterVenda(matricula,SituacaoVenda.aberto).cancelar();
     }
     
+    
+    public Venda[] historicoVenda(String matricula){
+        List<Venda> vendasImovel= new ArrayList<>();
+        this.vendas.stream()
+                .filter(venda -> venda.imovel.getMatricula().equals(matricula))
+                .forEach(venda -> vendasImovel.add(venda));
+        
+        return vendasImovel.toArray(new Venda[vendasImovel.size()]);
+    }
+    
+    public Venda[] historicoVenda(Imovel imovel){
+        return historicoVenda(imovel.getMatricula());
+    }
+    
+    //Locação
+    
     private boolean podeLocar(Imovel imovel){
         return this.locacoes.stream()
                 .filter(locacao -> locacao.imovel.equals(imovel) && locacao.situacao == SituacaoLocacao.aberto)
@@ -77,12 +105,12 @@ public class Imobiliaria {
         }
     }
     
-    public void locar(Imovel imovel, Pessoa inquilino, Date data, Date ate,double valor){
-        this.locar(imovel.getMatricula(), inquilino, data, ate, valor);
+    public void locar(Imovel imovel, Pessoa inquilino,double valor){
+        this.locar(imovel.getMatricula(), inquilino, valor);
     }
     
-    public void locar(String matricula, Pessoa inquilino, Date data,Date ate,double valor){
-        obterLocacao(matricula, SituacaoLocacao.aberto).locar(inquilino, data, ate, valor);
+    public void locar(String matricula, Pessoa inquilino,double valor){
+        obterLocacao(matricula, SituacaoLocacao.aberto).locar(inquilino, valor);
     }
     
     public void cancelarLocacao(Imovel imovel){
@@ -100,8 +128,24 @@ public class Imobiliaria {
                 .get();
     }
     
-    public Imovel[] getImoveis(){
-        return (Imovel[]) this.imoveis.stream().toArray();
-        //return this.imoveis.toArray(new Imovel[this.imoveis.size()]);
+    public Locacao[] historicoLocacao(String matricula){
+        List<Locacao> locacoesImovel= new ArrayList<>();
+        this.locacoes.stream()
+                .filter(locacao -> locacao.imovel.getMatricula().equals(matricula))
+                .forEach(locacao -> locacoesImovel.add(locacao));
+        
+        return locacoesImovel.toArray(new Locacao[locacoesImovel.size()]);
     }
+    
+    
+    public Locacao[] historicoLocacao(Imovel imovel){
+        return historicoLocacao(imovel.getMatricula());
+    }
+    
+    //Outros
+    public Imovel[] getImoveis(){
+        return this.imoveis.toArray(new Imovel[this.imoveis.size()]);
+    }
+    
+    
 }
