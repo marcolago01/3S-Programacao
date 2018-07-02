@@ -38,7 +38,7 @@ public class Venda {
 
     }
     
-    public String exibirLocacao(){
+    public String exibirVenda(){
         String compradorPrint = (this.comprador == null)? "Não definido":this.comprador.nome;
         
         return

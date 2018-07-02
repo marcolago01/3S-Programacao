@@ -6,9 +6,9 @@
 package Imobiliaria.Dominio;
 import Imobiliaria.Operacoes.*;
 import Imobiliaria.*;
+import Imobiliaria.Exceptions.*;
 import java.util.ArrayList;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +29,14 @@ public class Imobiliaria {
         this.locacoes = new LinkedList<>();
     }
     
-    public void adicionarImovel (Imovel imovel){
+    public void adicionarImovel (Imovel imovel) throws MatriculaExistenteException{
+        if
+            (0 != this.imoveis.stream()
+            .filter(imo -> imo.getMatricula().equals(imovel.getMatricula()))
+            .count())
+        {
+            throw new MatriculaExistenteException();
+        }
         this.imoveis.add(imovel);
     }
     
@@ -42,13 +49,17 @@ public class Imobiliaria {
     
     //Venda
     
-    private boolean podeVender(Imovel imovel){
-        return this.vendas.stream()
+    private boolean podeVender(Imovel imovel) throws VendaAtivaExistenteException{
+        boolean podeVender = this.vendas.stream()
                 .filter(venda -> venda.imovel.equals(imovel) && venda.situacao == SituacaoVenda.aberto)
                 .count() == 0;
+        if(!podeVender){
+            throw new VendaAtivaExistenteException();
+        }
+        return podeVender;
     }
     
-    public void adicionarVenda(Imovel imovel, double valor){
+    public void adicionarVenda(Imovel imovel, double valor) throws VendaAtivaExistenteException{
         if(podeVender(imovel)){
             this.vendas.add(new Venda(imovel,valor));
         }
@@ -93,13 +104,17 @@ public class Imobiliaria {
     
     //Locação
     
-    private boolean podeLocar(Imovel imovel){
-        return this.locacoes.stream()
+    private boolean podeLocar(Imovel imovel) throws LocacaoAtivaExistenteException{
+        boolean podeLocar =  this.locacoes.stream()
                 .filter(locacao -> locacao.imovel.equals(imovel) && locacao.situacao == SituacaoLocacao.aberto)
                 .count() == 0;
+        if(!podeLocar){
+            throw new LocacaoAtivaExistenteException();
+        }
+        return podeLocar;
     }
     
-    public void adicionarLocacao(Imovel imovel,double valor){
+    public void adicionarLocacao(Imovel imovel,double valor) throws LocacaoAtivaExistenteException{
         if(podeLocar(imovel)){
             this.locacoes.add(new Locacao(imovel, valor));
         }
@@ -145,6 +160,26 @@ public class Imobiliaria {
     //Outros
     public Imovel[] getImoveis(){
         return this.imoveis.toArray(new Imovel[this.imoveis.size()]);
+    }
+    
+    public void apagarImovel(String matricula) throws VendaAtreladaImovelException, LocacaoAtreladaImovelException{
+        Imovel imovel = obterImovel(matricula);
+        
+        Locacao[] locacaoImovel = historicoLocacao(imovel);
+        Venda[] vendaImovel = historicoVenda(imovel);
+        
+        for (Locacao locacao : locacaoImovel) {
+            if(locacao.imovel.getMatricula().equals(matricula)){
+                throw new LocacaoAtreladaImovelException();
+            }
+        }
+        for (Venda venda : vendaImovel) {
+            if(venda.imovel.getMatricula().equals(matricula)){
+                throw new LocacaoAtreladaImovelException();
+            }
+        }
+        
+        this.imoveis.remove(imovel);
     }
     
     
